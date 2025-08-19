@@ -1,0 +1,43 @@
+# GitHub Pages Configuration para Majestic Flower Documentation
+title: "Majestic Flower - Decompilador Java"
+description: "Documentação completa do Majestic Flower em português brasileiro"
+url: ""
+baseurl: ""
+
+# GitHub Pages settings
+remote_theme: null
+plugins: []
+
+# Configurações gerais
+lang: pt-BR
+encoding: utf-8
+highlighter: none
+markdown: kramdown
+
+# Exclusões para GitHub Pages
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Inclusões
+include:
+  - _headers
+  - _redirects
+
+# SEO e metadados
+author:
+  name: "JetBrains"
+  url: "https://www.jetbrains.com"
+
+social:
+  type: Organization
+  links:
+    - "https://github.com/JetBrains/intellij-community"
+
+# Configuração de build
+safe: true
+incremental: false
+strict_front_matter: false
