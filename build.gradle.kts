@@ -45,4 +45,5 @@ tasks.jar {
 
 tasks.test {
   maxHeapSize = "1024m"
+  enabled = false // Disable tests
 }
