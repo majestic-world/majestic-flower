@@ -34,7 +34,7 @@ java -jar majestic-flower.jar -ren=2 arquivo.jar saida/
 
 ## 📚 Documentação Completa
 
-**👉 [Ver Documentação Detalhada](https://majesticworldstudio.github.io/majestic-flower/)**
+**👉 [Ver Documentação Detalhada](https://majestic-world.github.io/majestic-flower/)**
 
 A documentação completa inclui:
 - Guia de instalação
@@ -45,7 +45,7 @@ A documentação completa inclui:
 
 ## 💾 Download
 
-Baixe a versão mais recente do `majestic-flower.jar` na seção [Releases](../../releases).
+Baixe a versão mais recente em [Releases](../../releases).
 
 ## 🏗️ Instalação
 
