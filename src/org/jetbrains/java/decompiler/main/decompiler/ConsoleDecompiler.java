@@ -70,8 +70,14 @@ public class ConsoleDecompiler implements IBytecodeProvider, IResultSaver {
     }
 
     File destination = new File(args[args.length - 1]);
-    if (!destination.isDirectory()) {
-      System.out.println("error: destination '" + destination + "' is not a directory");
+    if (!destination.exists()) {
+      System.out.println("Creating destination directory: " + destination.getAbsolutePath());
+      if (!destination.mkdirs()) {
+        System.out.println("error: could not create destination directory '" + destination + "'");
+        return;
+      }
+    } else if (!destination.isDirectory()) {
+      System.out.println("error: destination '" + destination + "' exists but is not a directory");
       return;
     }
 
