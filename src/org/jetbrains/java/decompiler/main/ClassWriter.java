@@ -445,7 +445,7 @@ public class ClassWriter {
       appendDeprecation(buffer, indent);
     }
 
-    if (interceptor != null) {
+    if (interceptor != null && DecompilerContext.getOption(IFernflowerPreferences.SHOW_RENAME_COMMENTS)) {
       String oldName = interceptor.getOldName(cl.qualifiedName);
       appendRenameComment(buffer, oldName, MType.CLASS, indent);
     }
@@ -581,7 +581,7 @@ public class ClassWriter {
       appendDeprecation(buffer, indent);
     }
 
-    if (interceptor != null) {
+    if (interceptor != null && DecompilerContext.getOption(IFernflowerPreferences.SHOW_RENAME_COMMENTS)) {
       String oldName = interceptor.getOldName(cl.qualifiedName + " " + fd.getName() + " " + fd.getDescriptor());
       appendRenameComment(buffer, oldName, MType.FIELD, indent);
     }
@@ -765,7 +765,7 @@ public class ClassWriter {
         appendDeprecation(buffer, indent);
       }
 
-      if (interceptor != null) {
+      if (interceptor != null && DecompilerContext.getOption(IFernflowerPreferences.SHOW_RENAME_COMMENTS)) {
         String oldName = interceptor.getOldName(cl.qualifiedName + " " + mt.getName() + " " + mt.getDescriptor());
         appendRenameComment(buffer, oldName, MType.METHOD, indent);
       }

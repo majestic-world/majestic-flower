@@ -45,6 +45,7 @@ public interface IFernflowerPreferences {
   String LOG_LEVEL = "log";
   String MAX_PROCESSING_METHOD = "mpm";
   String RENAME_ENTITIES = "ren";
+  String SHOW_RENAME_COMMENTS = "rcc"; // show rename comments
   String USER_RENAMER_CLASS = "urc";
   String NEW_LINE_SEPARATOR = "nls";
   String CHECK_CLOSABLE_INTERFACE = "cci";
@@ -109,6 +110,7 @@ public interface IFernflowerPreferences {
     defaults.put(LOG_LEVEL, IFernflowerLogger.Severity.INFO.name());
     defaults.put(MAX_PROCESSING_METHOD, "0");
     defaults.put(RENAME_ENTITIES, "0");
+    defaults.put(SHOW_RENAME_COMMENTS, "1"); // show rename comments by default
     defaults.put(NEW_LINE_SEPARATOR, (InterpreterUtil.IS_WINDOWS ? "0" : "1"));
     defaults.put(INDENT_STRING, "   ");
     defaults.put(BANNER, "");

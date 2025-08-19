@@ -48,10 +48,16 @@ public class Fernflower implements IDecompiledData {
     classProcessor = new ClassesProcessor(structContext);
 
     PoolInterceptor interceptor = null;
-    if ("1".equals(properties.get(IFernflowerPreferences.RENAME_ENTITIES))) {
+    String renameOption = (String)properties.get(IFernflowerPreferences.RENAME_ENTITIES);
+    if ("1".equals(renameOption) || "2".equals(renameOption)) {
       helper = loadHelper((String)properties.get(IFernflowerPreferences.USER_RENAMER_CLASS), logger);
       interceptor = new PoolInterceptor();
       converter = new IdentifierConverter(structContext, helper, interceptor);
+      
+      // If ren=2, disable rename comments
+      if ("2".equals(renameOption)) {
+        properties.put(IFernflowerPreferences.SHOW_RENAME_COMMENTS, "0");
+      }
     }
     else {
       helper = null;
