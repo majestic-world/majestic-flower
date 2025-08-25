@@ -24,8 +24,14 @@ public class ConsoleDecompiler implements IBytecodeProvider, IResultSaver {
   public static void main(String[] args) {
     if (args.length < 2) {
       System.out.println(
-        "Usage: java -jar fernflower.jar [-<option>=<value>]* [<source>]+ <destination>\n" +
-        "Example: java -jar fernflower.jar -dgs=true c:\\my\\source\\ c:\\my.jar d:\\decompiled\\");
+        "Usage: java -jar majestic-flower.jar [-<option>=<value>]* [<source>]+ <destination>\n" +
+        "Example: java -jar majestic-flower.jar -top=2 server.jar output/\n" +
+        "         java -jar majestic-flower.jar -dgs=true c:\\my\\source\\ c:\\my.jar d:\\decompiled\\\n" +
+        "\n" +
+        "Special flags:\n" +
+        "  -top=0  Apply optimized settings with rename mode 0 (no renaming)\n" +
+        "  -top=1  Apply optimized settings with rename mode 1 (with comments)\n" +
+        "  -top=2  Apply optimized settings with rename mode 2 (no comments)");
       return;
     }
 
@@ -39,7 +45,32 @@ public class ConsoleDecompiler implements IBytecodeProvider, IResultSaver {
       String arg = args[i];
 
       if (isOption && arg.length() > 5 && arg.charAt(0) == '-' && arg.charAt(4) == '=') {
+        String key = arg.substring(1, 4);
         String value = arg.substring(5);
+        
+        // Handle -top flag - applies optimized settings with variable rename mode
+        if ("top".equals(key)) {
+          // Apply all the fixed optimized flags
+          mapOptions.put("dgs", "1");  // DECOMPILE_GENERIC_SIGNATURES
+          mapOptions.put("hes", "0");  // HIDE_EMPTY_SUPER
+          mapOptions.put("hdc", "0");  // HIDE_DEFAULT_CONSTRUCTOR
+          mapOptions.put("udv", "1");  // USE_DEBUG_VAR_NAMES
+          mapOptions.put("ump", "1");  // USE_METHOD_PARAMETERS
+          mapOptions.put("fdi", "1");  // FINALLY_DEINLINE
+          mapOptions.put("inn", "1");  // IDEA_NOT_NULL_ANNOTATION
+          mapOptions.put("den", "1");  // DECOMPILE_ENUM
+          mapOptions.put("das", "1");  // DECOMPILE_ASSERTIONS
+          mapOptions.put("din", "1");  // DECOMPILE_INNER
+          mapOptions.put("rer", "1");  // REMOVE_EMPTY_RANGES
+          mapOptions.put("rgn", "1");  // REMOVE_GET_CLASS_NEW
+          mapOptions.put("isl", "1");  // INLINE_SIMPLE_LAMBDAS
+          mapOptions.put("cci", "1");  // CHECK_CLOSABLE_INTERFACE
+          
+          // Apply the variable rename mode based on -top value
+          mapOptions.put("ren", value);  // RENAME_ENTITIES (0, 1, or 2)
+          continue;
+        }
+        
         if ("true".equalsIgnoreCase(value)) {
           value = "1";
         }
@@ -47,7 +78,7 @@ public class ConsoleDecompiler implements IBytecodeProvider, IResultSaver {
           value = "0";
         }
 
-        mapOptions.put(arg.substring(1, 4), value);
+        mapOptions.put(key, value);
       }
       else {
         isOption = false;
